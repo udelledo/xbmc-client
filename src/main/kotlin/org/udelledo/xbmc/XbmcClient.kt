@@ -59,8 +59,9 @@ class XbmcClient(private val host: String) {
         return mapper.readValue(response)
     }
 
-    fun getMovies(): XbmcResponse<GetMovieResponse> {
-        val response = postRequest(targetUrl, V8Request("VideoLibrary.GetMovies", GetMovieRequest()))
+    fun getMovies(properties: List<FieldMovies>? = null, limits: Limit? = null, sort: Sort? = null): XbmcResponse<GetMovieResponse> {
+
+        val response = postRequest(targetUrl, V8Request("VideoLibrary.GetMovies", GetMovieRequest(properties, limits, sort)))
         return mapper.readValue(response)
     }
 
